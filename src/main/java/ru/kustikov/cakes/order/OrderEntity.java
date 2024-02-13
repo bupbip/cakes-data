@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.kustikov.cakes.address.AddressEntity;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
@@ -44,6 +45,9 @@ public class OrderEntity {
     private BigDecimal resultPrice;
 
     @OneToOne
+    private AddressEntity address;
+
+    @OneToOne
     private UserEntity client;
 
     @OneToOne
@@ -55,6 +59,6 @@ public class OrderEntity {
     @Column(name = "complete_date")
     private Timestamp completeDate;
 
-    @OneToMany
-    private List<ProductOrderEntity> products;
+    @OneToMany(mappedBy = "order")
+    private List<ProductOrderEntity> productOrders;
 }

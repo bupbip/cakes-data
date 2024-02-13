@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +26,11 @@ public class ProductOrderEntity {
     private Long productOrderId;
 
     @ManyToOne
+    @JoinColumn(name = "order_id")
     private OrderEntity order;
 
     @ManyToOne
+    @JoinColumn(name = "product_id")
     private ProductEntity product;
 
     @Column(name = "quantity")

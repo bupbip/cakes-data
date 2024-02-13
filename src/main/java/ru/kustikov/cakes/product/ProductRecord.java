@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 public class ProductRecord {
     private Long productId;
 
+    private String name;
+
     private BigDecimal price;
 
     private Integer count;
@@ -17,6 +19,8 @@ public class ProductRecord {
     private String topping;
 
     private String comment;
+
+    private String type;
 
     private byte[] image;
 }

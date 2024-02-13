@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.kustikov.cakes.address.AddressEntity;
+import ru.kustikov.cakes.consumable.ConsumableEntity;
 import ru.kustikov.cakes.order.OrderEntity;
+import ru.kustikov.cakes.product.ProductEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 
 import java.sql.Timestamp;
@@ -30,8 +32,8 @@ public class UserEntity {
     @Column(name = "phone", unique = true)
     private String phone;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "description")
     private String description;
@@ -53,4 +55,10 @@ public class UserEntity {
 
     @Column(name = "last_activity")
     private Timestamp lastActivity;
+
+    @OneToMany
+    private List<ConsumableEntity> consumables;
+
+    @OneToMany
+    private List<ProductEntity> products;
 }

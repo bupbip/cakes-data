@@ -5,10 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.kustikov.cakes.user.UserEntity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -23,6 +25,9 @@ public class StatisticEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "statistic_id")
     private Long statisticId;
+
+    @OneToOne
+    private UserEntity user;
 
     @Column(name = "start_date")
     private Timestamp startDate;
