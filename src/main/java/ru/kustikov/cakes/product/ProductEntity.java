@@ -5,12 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.JdbcTypeCode;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
 import java.math.BigDecimal;
-import java.sql.Types;
 import java.util.List;
 
 @Entity
@@ -47,10 +45,8 @@ public class ProductEntity {
     @Column(name = "comment")
     private String comment;
 
-    @Lob
-    @Column(name = "image", columnDefinition = "bytea")
-    @JdbcTypeCode(Types.LONGVARBINARY)
-    private byte[] image;
+    @Column(name = "image")
+    private String image;
 
     @OneToMany(mappedBy = "product")
     private List<ProductOrderEntity> productOrders;

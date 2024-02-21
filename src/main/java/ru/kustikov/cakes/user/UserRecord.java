@@ -1,7 +1,6 @@
 package ru.kustikov.cakes.user;
 
 import lombok.Data;
-import ru.kustikov.cakes.address.AddressEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 
 import java.sql.Timestamp;
@@ -15,7 +14,7 @@ public class UserRecord {
 
     private String phone;
 
-    private String name;
+    private String username;
 
     private String description;
 
@@ -23,7 +22,9 @@ public class UserRecord {
 
     private String role;
 
-    private List<AddressEntity> addresses;
+    private String image;
+
+//    private List<AddressEntity> addresses;
 
     private List<SocialNetworkEntity> socialNetworks;
 

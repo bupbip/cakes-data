@@ -1,14 +1,11 @@
 package ru.kustikov.cakes.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.kustikov.cakes.address.AddressEntity;
-import ru.kustikov.cakes.consumable.ConsumableEntity;
-import ru.kustikov.cakes.order.OrderEntity;
-import ru.kustikov.cakes.product.ProductEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 
 import java.sql.Timestamp;
@@ -44,21 +41,25 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(targetEntity = AddressEntity.class, fetch = FetchType.EAGER)
-    private List<AddressEntity> addresses;
+    @Column(name = "image")
+    private String image;
 
-    @OneToMany(targetEntity = SocialNetworkEntity.class, fetch = FetchType.EAGER)
+//    @OneToMany(targetEntity = AddressEntity.class, fetch = FetchType.EAGER)
+//    private List<AddressEntity> addresses;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonManagedReference
     private List<SocialNetworkEntity> socialNetworks;
 
-    @ManyToMany(targetEntity = OrderEntity.class, fetch = FetchType.EAGER)
-    private List<OrderEntity> orders;
+//    @ManyToMany(targetEntity = OrderEntity.class, fetch = FetchType.EAGER)
+//    private List<OrderEntity> orders;
 
     @Column(name = "last_activity")
     private Timestamp lastActivity;
 
-    @OneToMany
-    private List<ConsumableEntity> consumables;
+//    @OneToMany
+//    private List<ConsumableEntity> consumables;
 
-    @OneToMany
-    private List<ProductEntity> products;
+//    @OneToMany
+//    private List<ProductEntity> products;
 }

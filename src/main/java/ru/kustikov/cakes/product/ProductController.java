@@ -2,10 +2,7 @@ package ru.kustikov.cakes.product;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.kustikov.cakes.user.UserEntity;
 import ru.kustikov.cakes.user.UserMapper;
 import ru.kustikov.cakes.user.UserService;
@@ -29,6 +26,10 @@ public class ProductController {
         }
     }
 
-
+    @PostMapping("/save")
+    public ResponseEntity<String> createProduct(@RequestBody ProductRecord product) {
+        productService.update(product);
+        return ResponseEntity.ok("Success!");
+    }
 
 }

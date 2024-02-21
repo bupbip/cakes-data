@@ -1,8 +1,11 @@
 package ru.kustikov.cakes.socialnetwork;
 
 public enum SocialNetworkType {
-    VK,
-    FACEBOOK,
     INSTAGRAM,
-    WEBSITE
+    VK,
+    PINTEREST,
+    TELEGRAM,
+    WHATSAPP,
+    YOUTUBE,
+    EMAIL
 }

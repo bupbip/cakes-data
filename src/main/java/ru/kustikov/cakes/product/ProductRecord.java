@@ -22,5 +22,5 @@ public class ProductRecord {
 
     private String type;
 
-    private byte[] image;
+    private String image;
 }
