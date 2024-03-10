@@ -2,15 +2,13 @@ package ru.kustikov.cakes.product;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 @Data
-public class ProductRecord {
+public class  ProductRecord {
     private Long productId;
 
     private String name;
 
-    private BigDecimal price;
+    private Integer price;
 
     private Integer count;
 
@@ -20,7 +18,9 @@ public class ProductRecord {
 
     private String comment;
 
-    private String type;
+    private ProductType productType;
 
     private String image;
+
+    private String ownerUsername;
 }

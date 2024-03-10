@@ -41,7 +41,7 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition="TEXT")
     private String image;
 
 //    @OneToMany(targetEntity = AddressEntity.class, fetch = FetchType.EAGER)

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.kustikov.cakes.user.UserEntity;
 
-@Entity
+@Entity(name = "social_networks")
 @Getter
 @Setter
 @AllArgsConstructor

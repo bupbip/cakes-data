@@ -1,27 +1,20 @@
 package ru.kustikov.cakes.order;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import ru.kustikov.cakes.address.AddressEntity;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Entity
+@Entity(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -35,23 +28,23 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @Column(name = "prefer_price", columnDefinition = "numeric(19,2)")
-    private BigDecimal preferPrice;
+    @Column(name = "prefer_price")
+    private Integer preferPrice;
 
-    @Column(name = "spent_price", columnDefinition = "numeric(19,2)")
-    private BigDecimal spentPrice;
+    @Column(name = "spent_price")
+    private Integer spentPrice;
 
-    @Column(name = "result_price", columnDefinition = "numeric(19,2)")
-    private BigDecimal resultPrice;
+    @Column(name = "result_price")
+    private Integer resultPrice;
 
     @OneToOne
     private AddressEntity address;
 
-    @OneToOne
-    private UserEntity client;
+    @ManyToOne
+    private UserEntity customer;
 
-    @OneToOne
-    private UserEntity baker;
+    @ManyToOne
+    private UserEntity confectioner;
 
     @Column(name = "created_date")
     private Timestamp createdDate;
@@ -60,5 +53,6 @@ public class OrderEntity {
     private Timestamp completeDate;
 
     @OneToMany(mappedBy = "order")
+    @Cascade(CascadeType.ALL)
     private List<ProductOrderEntity> productOrders;
 }

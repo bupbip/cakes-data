@@ -17,7 +17,7 @@ import ru.kustikov.cakes.user.UserEntity;
 
 import java.sql.Timestamp;
 
-@Entity
+@Entity(name = "feedbacks")
 @Getter
 @Setter
 @AllArgsConstructor

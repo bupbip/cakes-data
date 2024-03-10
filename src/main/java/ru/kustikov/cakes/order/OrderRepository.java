@@ -8,9 +8,12 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends CrudRepository<OrderEntity, Long> {
-    List<OrderEntity> getAllByBakerOrderByCreatedDate(UserEntity baker);
+    List<OrderEntity> getAllByConfectionerOrderByCreatedDate(UserEntity baker);
 
-    List<OrderEntity> getAllByClientOrderByCreatedDate(UserEntity client);
+    List<OrderEntity> getAllByCustomerOrderByCreatedDate(UserEntity client);
+
+
+    List<OrderEntity> getAllByCustomer_UserIdOrConfectioner_UserIdOrderByCreatedDateDesc(Long customerId, Long confectionerId);
 
 
 }

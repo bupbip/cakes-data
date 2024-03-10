@@ -2,9 +2,9 @@ package ru.kustikov.cakes.order;
 
 import lombok.Data;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
+import ru.kustikov.cakes.productorder.ProductOrderRecord;
 import ru.kustikov.cakes.user.UserEntity;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -14,17 +14,19 @@ public class OrderRecord {
 
     private String status;
 
-    private BigDecimal preferPrice;
+    private Integer preferPrice;
 
-    private BigDecimal resultPrice;
+    private Integer spentPrice;
 
-    private UserEntity client;
+    private Integer resultPrice;
 
-    private UserEntity baker;
+    private UserEntity customer;
+
+    private UserEntity confectioner;
 
     private Timestamp createdDate;
 
     private Timestamp completeDate;
 
-    private List<ProductOrderEntity> products;
+    private List<ProductOrderRecord> products;
 }

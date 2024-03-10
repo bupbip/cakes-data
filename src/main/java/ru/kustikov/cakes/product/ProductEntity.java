@@ -5,13 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-@Entity
+@Entity(name = "products")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -30,8 +29,8 @@ public class ProductEntity {
     @Enumerated(EnumType.STRING)
     private ProductType productType;
 
-    @Column(name = "price", columnDefinition = "numeric(19,2)")
-    private BigDecimal price;
+    @Column(name = "price")
+    private Integer price;
 
     @Column(name = "count")
     private Integer count;
@@ -45,11 +44,12 @@ public class ProductEntity {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "image")
+    @Column(name = "image", columnDefinition="TEXT")
     private String image;
 
-    @OneToMany(mappedBy = "product")
-    private List<ProductOrderEntity> productOrders;
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    private ProductOrderEntity productOrder;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

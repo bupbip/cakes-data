@@ -15,7 +15,7 @@ import ru.kustikov.cakes.user.UserEntity;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-@Entity
+@Entity(name = "statistics")
 @Getter
 @Setter
 @AllArgsConstructor

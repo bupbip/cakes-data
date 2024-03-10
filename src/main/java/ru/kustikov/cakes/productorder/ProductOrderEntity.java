@@ -1,20 +1,17 @@
 package ru.kustikov.cakes.productorder;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.mapstruct.Mapping;
 import ru.kustikov.cakes.order.OrderEntity;
 import ru.kustikov.cakes.product.ProductEntity;
 
-@Entity
+@Entity(name = "product_orders")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -29,10 +26,14 @@ public class ProductOrderEntity {
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "product_id")
+    @Cascade(CascadeType.ALL)
     private ProductEntity product;
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @Column(name = "reference", columnDefinition="TEXT")
+    private String reference;
 }

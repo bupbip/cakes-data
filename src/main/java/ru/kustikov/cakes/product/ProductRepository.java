@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends CrudRepository<ProductEntity, Long> {
-    List<ProductEntity> findAll();
+    List<ProductEntity> findAllByAuthorNotNull();
 
     List<ProductEntity> findAllByAuthor(UserEntity user);
 }

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kustikov.cakes.user.UserEntity;
+import ru.kustikov.cakes.user.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,13 +14,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository productRepository;
+    private final UserRepository userRepository;
     private final ProductMapper productMapper;
-
-    public ProductRecord create(ProductRecord productRecord) {
-        ProductEntity productEntity = productMapper.dtoToEntity(productRecord);
-        ProductEntity savedProductEntity = productRepository.save(productEntity);
-        return productMapper.entityToDto(savedProductEntity);
-    }
 
     public ProductRecord get(Long id) {
         ProductEntity productEntity = productRepository.findById(id)
@@ -28,7 +24,7 @@ public class ProductService {
     }
 
     public List<ProductRecord> getAll() {
-        List<ProductEntity> products = productRepository.findAll();
+        List<ProductEntity> products = productRepository.findAllByAuthorNotNull();
 
         return products.stream()
                 .map(productMapper::entityToDto)
@@ -45,6 +41,7 @@ public class ProductService {
 
     public ProductRecord update(ProductRecord productRecord) {
         ProductEntity productEntity = productMapper.dtoToEntity(productRecord);
+        productEntity.setAuthor(userRepository.findByUsername(productRecord.getOwnerUsername()).orElseThrow());
         ProductEntity savedProductEntity = productRepository.save(productEntity);
         return productMapper.entityToDto(savedProductEntity);
     }
