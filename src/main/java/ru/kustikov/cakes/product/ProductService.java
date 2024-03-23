@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kustikov.cakes.user.UserEntity;
+import ru.kustikov.cakes.user.UserMapper;
+import ru.kustikov.cakes.user.UserRecord;
 import ru.kustikov.cakes.user.UserRepository;
 
 import java.util.List;
@@ -16,6 +18,7 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final ProductMapper productMapper;
+    private final UserMapper userMapper;
 
     public ProductRecord get(Long id) {
         ProductEntity productEntity = productRepository.findById(id)
@@ -31,8 +34,8 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProductRecord> getAllByUser(UserEntity user) {
-        List<ProductEntity> products = productRepository.findAllByAuthor(user);
+    public List<ProductRecord> getAllByUser(UserRecord user) {
+        List<ProductEntity> products = productRepository.findAllByAuthor(userMapper.dtoToEntity(user));
 
         return products.stream()
                 .map(productMapper::entityToDto)

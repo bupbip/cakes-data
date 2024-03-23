@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import ru.kustikov.cakes.address.AddressEntity;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
@@ -52,7 +51,6 @@ public class OrderEntity {
     @Column(name = "complete_date")
     private Timestamp completeDate;
 
-    @OneToMany(mappedBy = "order")
-    @Cascade(CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<ProductOrderEntity> productOrders;
 }

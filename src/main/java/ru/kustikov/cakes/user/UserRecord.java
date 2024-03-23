@@ -1,6 +1,8 @@
 package ru.kustikov.cakes.user;
 
 import lombok.Data;
+import ru.kustikov.cakes.filling.FillingRecord;
+import ru.kustikov.cakes.producttype.ProductTypeRecord;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 
 import java.sql.Timestamp;
@@ -27,6 +29,10 @@ public class UserRecord {
 //    private List<AddressEntity> addresses;
 
     private List<SocialNetworkEntity> socialNetworks;
+
+    private List<ProductTypeRecord> productTypes;
+
+    private List<FillingRecord> fillings;
 
     private Timestamp lastActivity;
 }

@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
@@ -44,14 +42,24 @@ public class ProductEntity {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "image", columnDefinition="TEXT")
+    @Column(name = "image", columnDefinition = "TEXT")
     private String image;
 
-    @OneToOne
-    @Cascade(CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private ProductOrderEntity productOrder;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity author;
+
+    public ProductEntity(ProductEntity original) {
+        this.name = original.getName();
+        this.productType = original.getProductType();
+        this.price = original.getPrice();
+        this.count = original.getCount();
+        this.weight = original.getWeight();
+        this.topping = original.getTopping();
+        this.comment = original.getComment();
+        this.image = original.getImage();
+    }
 }

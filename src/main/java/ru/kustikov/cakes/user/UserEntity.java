@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.kustikov.cakes.filling.FillingEntity;
+import ru.kustikov.cakes.producttype.ProductTypeEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 
 import java.sql.Timestamp;
@@ -50,6 +52,14 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonManagedReference
     private List<SocialNetworkEntity> socialNetworks;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<ProductTypeEntity> productTypes;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonManagedReference
+    private List<FillingEntity> fillings;
 
 //    @ManyToMany(targetEntity = OrderEntity.class, fetch = FetchType.EAGER)
 //    private List<OrderEntity> orders;

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kustikov.cakes.user.UserEntity;
 import ru.kustikov.cakes.user.UserMapper;
+import ru.kustikov.cakes.user.UserRecord;
 import ru.kustikov.cakes.user.UserService;
 
 @RestController
@@ -19,7 +20,7 @@ public class ProductController {
     @GetMapping("/get-all")
     public ResponseEntity<Object> getAll(@RequestParam(required = false) String username) {
         if (username != null && !username.isEmpty()) {
-            UserEntity user = userService.getUserByUsername(username);
+            UserRecord user = userService.getUserByUsername(username);
             return ResponseEntity.ok(productService.getAllByUser(user));
         } else {
             return ResponseEntity.ok(productService.getAll());

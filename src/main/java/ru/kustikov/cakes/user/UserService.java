@@ -34,14 +34,17 @@ public class UserService {
         return userMapper.entityToDto(savedUser);
     }
 
-    public UserEntity getUserByUsername(String username) {
-        return userRepository.findByUsername(username)
+    public UserRecord getUserByUsername(String username) {
+        UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        return userMapper.entityToDto(user);
     }
 
     public UserRecord update(UserRecord userRecord) {
         UserEntity userEntity = userMapper.dtoToEntity(userRecord);
         userEntity.getSocialNetworks().forEach(social -> social.setUser(userEntity));
+        userEntity.getFillings().forEach(filling -> filling.setUser(userEntity));
+        userEntity.getProductTypes().forEach(productType -> productType.setUser(userEntity));
         socialNetworkRepository.saveAll(userEntity.getSocialNetworks());
         UserEntity savedUserEntity = userRepository.save(userEntity);
         return userMapper.entityToDto(savedUserEntity);

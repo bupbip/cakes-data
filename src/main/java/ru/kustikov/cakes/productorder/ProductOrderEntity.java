@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.mapstruct.Mapping;
 import ru.kustikov.cakes.order.OrderEntity;
 import ru.kustikov.cakes.product.ProductEntity;
 
@@ -26,14 +23,13 @@ public class ProductOrderEntity {
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
-    @Cascade(CascadeType.ALL)
     private ProductEntity product;
 
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "reference", columnDefinition="TEXT")
-    private String reference;
+    @Column(name = "result_image", columnDefinition = "TEXT")
+    private String resultImage;
 }

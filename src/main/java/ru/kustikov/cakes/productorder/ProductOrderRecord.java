@@ -14,5 +14,5 @@ public class ProductOrderRecord {
 
     private Integer quantity;
 
-    private String reference;
+    private String resultImage;
 }
