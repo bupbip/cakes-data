@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import ru.kustikov.cakes.address.AddressEntity;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
@@ -36,8 +34,7 @@ public class OrderEntity {
     @Column(name = "result_price")
     private Integer resultPrice;
 
-    @OneToOne
-    private AddressEntity address;
+    private String address;
 
     @ManyToOne
     private UserEntity customer;

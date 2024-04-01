@@ -14,7 +14,6 @@ public class OrderController {
 
     @GetMapping("/get-all")
     public ResponseEntity<List<OrderRecord>> getUserOrders(@RequestParam String userId) {
-        var text = orderService.getAllByUserId(userId);
         return ResponseEntity.ok(orderService.getAllByUserId(userId));
     }
 

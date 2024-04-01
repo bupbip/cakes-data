@@ -48,7 +48,7 @@ public class ProductTypeEntity {
     @Column(name = "fillings")
     private List<Long> fillings;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private UserEntity user;

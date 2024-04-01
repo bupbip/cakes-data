@@ -1,4 +1,9 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cake_database
+    username: postgres
+    password: 12345678
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -16,10 +21,5 @@ spring:
         jdbc:
           lob:
             non_contextual_creation=true
-  datasource:
-    url: jdbc:postgresql://localhost:5432/cake_database
-    username: postgres
-    password: 12345678
-    driver-class-name: org.postgresql.Driver
 server:
   port: 4300

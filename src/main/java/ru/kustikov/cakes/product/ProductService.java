@@ -3,7 +3,6 @@ package ru.kustikov.cakes.product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.kustikov.cakes.user.UserEntity;
 import ru.kustikov.cakes.user.UserMapper;
 import ru.kustikov.cakes.user.UserRecord;
 import ru.kustikov.cakes.user.UserRepository;

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.kustikov.cakes.consumable.ConsumableEntity;
 import ru.kustikov.cakes.filling.FillingEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
@@ -46,14 +47,11 @@ public class UserEntity {
     @Column(name = "image", columnDefinition="TEXT")
     private String image;
 
-//    @OneToMany(targetEntity = AddressEntity.class, fetch = FetchType.EAGER)
-//    private List<AddressEntity> addresses;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @JsonManagedReference
     private List<SocialNetworkEntity> socialNetworks;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<ProductTypeEntity> productTypes;
 
@@ -61,15 +59,11 @@ public class UserEntity {
     @JsonManagedReference
     private List<FillingEntity> fillings;
 
-//    @ManyToMany(targetEntity = OrderEntity.class, fetch = FetchType.EAGER)
-//    private List<OrderEntity> orders;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonManagedReference
+    private List<ConsumableEntity> consumables;
 
     @Column(name = "last_activity")
     private Timestamp lastActivity;
 
-//    @OneToMany
-//    private List<ConsumableEntity> consumables;
-
-//    @OneToMany
-//    private List<ProductEntity> products;
 }

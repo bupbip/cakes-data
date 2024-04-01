@@ -3,6 +3,7 @@ package ru.kustikov.cakes.user;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.kustikov.cakes.producttype.ProductTypeRepository;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkRepository;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final SocialNetworkRepository socialNetworkRepository;
+    private final ProductTypeRepository productTypeRepository;
 
     private final UserMapper userMapper;
 
@@ -46,6 +48,8 @@ public class UserService {
         userEntity.getFillings().forEach(filling -> filling.setUser(userEntity));
         userEntity.getProductTypes().forEach(productType -> productType.setUser(userEntity));
         socialNetworkRepository.saveAll(userEntity.getSocialNetworks());
+        productTypeRepository.saveAll(userEntity.getProductTypes());
+
         UserEntity savedUserEntity = userRepository.save(userEntity);
         return userMapper.entityToDto(savedUserEntity);
     }
