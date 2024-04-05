@@ -25,7 +25,6 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "productTypeId")
 public class ProductTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

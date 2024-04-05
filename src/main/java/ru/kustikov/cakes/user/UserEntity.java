@@ -1,7 +1,16 @@
 package ru.kustikov.cakes.user;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +18,7 @@ import lombok.Setter;
 import ru.kustikov.cakes.consumable.ConsumableEntity;
 import ru.kustikov.cakes.filling.FillingEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
+import ru.kustikov.cakes.rolerequest.RoleRequestEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 
 import java.sql.Timestamp;
@@ -52,15 +62,12 @@ public class UserEntity {
     private List<SocialNetworkEntity> socialNetworks;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonManagedReference
     private List<ProductTypeEntity> productTypes;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonManagedReference
     private List<FillingEntity> fillings;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonManagedReference
     private List<ConsumableEntity> consumables;
 
     @Column(name = "last_activity")

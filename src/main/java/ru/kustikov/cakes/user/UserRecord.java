@@ -3,6 +3,8 @@ package ru.kustikov.cakes.user;
 import lombok.Data;
 import ru.kustikov.cakes.filling.FillingRecord;
 import ru.kustikov.cakes.producttype.ProductTypeRecord;
+import ru.kustikov.cakes.rolerequest.RoleRequestEntity;
+import ru.kustikov.cakes.rolerequest.RoleRequestRecord;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 
 import java.sql.Timestamp;
@@ -25,8 +27,6 @@ public class UserRecord {
     private String role;
 
     private String image;
-
-//    private List<AddressEntity> addresses;
 
     private List<SocialNetworkEntity> socialNetworks;
 

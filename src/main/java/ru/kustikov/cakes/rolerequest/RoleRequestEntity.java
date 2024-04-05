@@ -1,9 +1,5 @@
-package ru.kustikov.cakes.filling;
+package ru.kustikov.cakes.rolerequest;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,31 +7,29 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.kustikov.cakes.user.UserEntity;
 
-@Entity(name = "fillings")
+import java.sql.Timestamp;
+
+@Entity(name = "role_requests")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FillingEntity {
+public class RoleRequestEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "filling_id")
-    private Long fillingId;
+    @Column(name = "role_request_id")
+    private Long roleRequestId;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "description")
-    private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @OneToOne
     private UserEntity user;
+
+    @Column(name = "request_datetime")
+    private Timestamp requestDatetime;
 }
