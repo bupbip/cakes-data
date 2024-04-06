@@ -2,6 +2,7 @@ package ru.kustikov.cakes.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.kustikov.cakes.producttype.ProductTypeRepository;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkRepository;
@@ -54,8 +55,8 @@ public class UserService {
         return userMapper.entityToDto(savedUserEntity);
     }
 
-    public List<UserRecord> getConfectioners() {
-        return userRepository.findAllByRoleOrderByLastActivity(Role.ROLE_CONFECTIONER)
+    public List<UserRecord> getConfectioners(Integer skip, Integer limit) {
+        return userRepository.findAllByRoleOrderByLastActivity(PageRequest.of(skip/limit, limit), Role.ROLE_CONFECTIONER)
                 .stream().map(userMapper::entityToDto)
                 .toList();
     }

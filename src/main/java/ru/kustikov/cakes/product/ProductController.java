@@ -18,12 +18,15 @@ public class ProductController {
     private final UserMapper userMapper;
 
     @GetMapping("/get-all")
-    public ResponseEntity<Object> getAll(@RequestParam(required = false) String username) {
+    public ResponseEntity<Object> getAll(@RequestParam(required = false) String username,
+                                         @RequestParam Integer skip,
+                                         @RequestParam Integer limit
+    ) {
         if (username != null && !username.isEmpty()) {
             UserRecord user = userService.getUserByUsername(username);
             return ResponseEntity.ok(productService.getAllByUser(user));
         } else {
-            return ResponseEntity.ok(productService.getAll());
+            return ResponseEntity.ok(productService.getAll(skip, limit));
         }
     }
 

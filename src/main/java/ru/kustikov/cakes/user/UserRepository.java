@@ -1,5 +1,7 @@
 package ru.kustikov.cakes.user;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +14,6 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     Optional<UserEntity> findByUsername(String username);
 
     List<UserEntity> findAllByRoleOrderByLastActivity(Role role);
+
+    Page<UserEntity> findAllByRoleOrderByLastActivity(Pageable pageable, Role role);
 }

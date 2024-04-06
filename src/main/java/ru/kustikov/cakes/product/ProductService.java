@@ -2,6 +2,8 @@ package ru.kustikov.cakes.product;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.kustikov.cakes.user.UserMapper;
 import ru.kustikov.cakes.user.UserRecord;
@@ -25,8 +27,8 @@ public class ProductService {
         return productMapper.entityToDto(productEntity);
     }
 
-    public List<ProductRecord> getAll() {
-        List<ProductEntity> products = productRepository.findAllByAuthorNotNull();
+    public List<ProductRecord> getAll(Integer skip, Integer limit) {
+        Page<ProductEntity> products = productRepository.findAllByAuthorNotNull(PageRequest.of(skip/limit, limit));
 
         return products.stream()
                 .map(productMapper::entityToDto)

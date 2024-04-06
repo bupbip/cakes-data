@@ -33,8 +33,9 @@ public class UserController {
     }
 
     @GetMapping("/confectioners")
-    public ResponseEntity<Object> getConfectioners() {
-        return ResponseEntity.ok(userService.getConfectioners());
+    public ResponseEntity<Object> getConfectioners(@RequestParam Integer skip,
+                                                   @RequestParam Integer limit) {
+        return ResponseEntity.ok(userService.getConfectioners(skip, limit));
     }
 
     @PostMapping("/save")
