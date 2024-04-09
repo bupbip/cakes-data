@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.kustikov.cakes.filling.FillingEntity;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
+import ru.kustikov.cakes.producttype.ProductTypeEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
 @Entity(name = "products")
@@ -23,9 +25,8 @@ public class ProductEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "product_type")
-    @Enumerated(EnumType.STRING)
-    private ProductType productType;
+    @ManyToOne
+    private ProductTypeEntity productType;
 
     @Column(name = "price")
     private Integer price;
@@ -36,8 +37,8 @@ public class ProductEntity {
     @Column(name = "weight")
     private Double weight;
 
-    @Column(name = "topping")
-    private String topping;
+    @ManyToOne
+    private FillingEntity topping;
 
     @Column(name = "comment")
     private String comment;

@@ -19,8 +19,8 @@ public class ProductController {
 
     @GetMapping("/get-all")
     public ResponseEntity<Object> getAll(@RequestParam(required = false) String username,
-                                         @RequestParam Integer skip,
-                                         @RequestParam Integer limit
+                                         @RequestParam(required = false) Integer skip,
+                                         @RequestParam(required = false) Integer limit
     ) {
         if (username != null && !username.isEmpty()) {
             UserRecord user = userService.getUserByUsername(username);

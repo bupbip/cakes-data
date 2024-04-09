@@ -1,6 +1,8 @@
 package ru.kustikov.cakes.product;
 
 import lombok.Data;
+import ru.kustikov.cakes.filling.FillingRecord;
+import ru.kustikov.cakes.producttype.ProductTypeRecord;
 
 @Data
 public class  ProductRecord {
@@ -14,11 +16,11 @@ public class  ProductRecord {
 
     private Double weight;
 
-    private String topping;
+    private FillingRecord topping;
 
     private String comment;
 
-    private ProductType productType;
+    private ProductTypeRecord productType;
 
     private String image;
 
