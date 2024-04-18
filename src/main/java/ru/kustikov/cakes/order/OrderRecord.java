@@ -1,11 +1,10 @@
 package ru.kustikov.cakes.order;
 
 import lombok.Data;
-import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.productorder.ProductOrderRecord;
 import ru.kustikov.cakes.user.UserEntity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -24,9 +23,9 @@ public class OrderRecord {
 
     private UserEntity confectioner;
 
-    private Timestamp createdDate;
+    private LocalDateTime createdDate;
 
-    private Timestamp completeDate;
+    private LocalDateTime completeDate;
 
     private List<ProductOrderRecord> products;
 }

@@ -1,5 +1,6 @@
 package ru.kustikov.cakes.order;
 
+import jakarta.persistence.PostPersist;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class OrderService {
         return orderMapper.entityToDto(orderEntity);
     }
 
+    @PostPersist
     public OrderRecord update(OrderRecord orderRecord) {
         OrderEntity orderEntity = orderMapper.dtoToEntity(orderRecord);
 

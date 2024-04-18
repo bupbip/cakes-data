@@ -9,6 +9,7 @@ import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity(name = "orders")
@@ -43,10 +44,10 @@ public class OrderEntity {
     private UserEntity confectioner;
 
     @Column(name = "created_date")
-    private Timestamp createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "complete_date")
-    private Timestamp completeDate;
+    private LocalDateTime completeDate;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<ProductOrderEntity> productOrders;

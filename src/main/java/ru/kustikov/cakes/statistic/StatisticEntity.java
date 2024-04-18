@@ -14,6 +14,7 @@ import ru.kustikov.cakes.user.UserEntity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity(name = "statistics")
 @Getter
@@ -29,21 +30,24 @@ public class StatisticEntity {
     @OneToOne
     private UserEntity user;
 
-    @Column(name = "start_date")
-    private Timestamp startDate;
+    @Column(name = "year")
+    private Integer year;
 
-    @Column(name = "end_date")
-    private Timestamp endDate;
+    @Column(name = "month")
+    private Integer month;
 
     @Column(name = "order_count")
     private Integer orderCount;
 
-    @Column(name = "income", columnDefinition = "numeric(19,2)")
-    private BigDecimal income;
+    @Column(name = "customer_count")
+    private Integer customerCount;
 
-    @Column(name = "expences", columnDefinition = "numeric(19,2)")
-    private BigDecimal expences;
+    @Column(name = "income")
+    private Long income;
 
-    @Column(name = "profit", columnDefinition = "numeric(19,2)")
-    private BigDecimal profit;
+    @Column(name = "expences")
+    private Long expences;
+
+    @Column(name = "profit")
+    private Long profit;
 }
