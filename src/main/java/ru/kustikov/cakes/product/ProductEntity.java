@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.kustikov.cakes.consumable.ConsumableEntity;
 import ru.kustikov.cakes.filling.FillingEntity;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
 import ru.kustikov.cakes.user.UserEntity;
+
+import java.util.List;
 
 @Entity(name = "products")
 @Getter
@@ -48,6 +51,9 @@ public class ProductEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     private ProductOrderEntity productOrder;
+
+    @ManyToMany
+    private List<ConsumableEntity> consumables;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -9,12 +9,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.kustikov.cakes.product.ProductEntity;
 import ru.kustikov.cakes.user.UserEntity;
+
+import java.util.List;
 
 @Entity(name = "consumables")
 @Getter
@@ -33,15 +37,20 @@ public class ConsumableEntity {
     @Column(name = "quantity")
     private Double quantity;
 
+    @Column(name = "threshold")
+    private Double threshold;
+
     /**
      * Тип количества (штуки, граммы, литры и т.д.)
      */
     @Column(name = "quantity_type")
-    @Enumerated(EnumType.STRING)
-    private ConsumableQuantityType quantityType;
+    private String quantityType;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private UserEntity user;
+
+    @ManyToMany
+    private List<ProductEntity> products;
 }

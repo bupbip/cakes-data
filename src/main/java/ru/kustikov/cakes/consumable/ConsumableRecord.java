@@ -10,5 +10,7 @@ public class ConsumableRecord {
 
     private Double quantity;
 
-    private ConsumableQuantityType quantityType;
+    private Double threshold;
+
+    private String quantityType;
 }

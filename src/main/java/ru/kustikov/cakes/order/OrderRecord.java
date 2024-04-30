@@ -27,5 +27,9 @@ public class OrderRecord {
 
     private LocalDateTime completeDate;
 
+    private String deliveryType;
+
+    private String address;
+
     private List<ProductOrderRecord> products;
 }

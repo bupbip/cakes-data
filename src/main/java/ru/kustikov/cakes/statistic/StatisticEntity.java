@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class StatisticEntity {
     @Column(name = "statistic_id")
     private Long statisticId;
 
-    @OneToOne
+    @ManyToOne
     private UserEntity user;
 
     @Column(name = "year")

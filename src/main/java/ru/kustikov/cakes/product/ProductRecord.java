@@ -1,8 +1,11 @@
 package ru.kustikov.cakes.product;
 
 import lombok.Data;
+import ru.kustikov.cakes.consumable.ConsumableRecord;
 import ru.kustikov.cakes.filling.FillingRecord;
 import ru.kustikov.cakes.producttype.ProductTypeRecord;
+
+import java.util.List;
 
 @Data
 public class  ProductRecord {
@@ -25,4 +28,6 @@ public class  ProductRecord {
     private String image;
 
     private String ownerUsername;
+
+    private List<ConsumableRecord> consumables;
 }
