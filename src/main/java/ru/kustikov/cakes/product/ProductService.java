@@ -46,6 +46,7 @@ public class ProductService {
     public ProductRecord update(ProductRecord productRecord) {
         ProductEntity productEntity = productMapper.dtoToEntity(productRecord);
         productEntity.setAuthor(userRepository.findByUsername(productRecord.getOwnerUsername()).orElseThrow());
+        productEntity.getConsumableProducts().forEach(p -> p.setProduct(productEntity));
         ProductEntity savedProductEntity = productRepository.save(productEntity);
         return productMapper.entityToDto(savedProductEntity);
     }

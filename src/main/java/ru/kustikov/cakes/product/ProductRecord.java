@@ -2,6 +2,8 @@ package ru.kustikov.cakes.product;
 
 import lombok.Data;
 import ru.kustikov.cakes.consumable.ConsumableRecord;
+import ru.kustikov.cakes.consumableproduct.ConsumableProductEntity;
+import ru.kustikov.cakes.consumableproduct.ConsumableProductRecord;
 import ru.kustikov.cakes.filling.FillingRecord;
 import ru.kustikov.cakes.producttype.ProductTypeRecord;
 
@@ -29,5 +31,5 @@ public class  ProductRecord {
 
     private String ownerUsername;
 
-    private List<ConsumableRecord> consumables;
+    private List<ConsumableProductRecord> consumableProducts;
 }

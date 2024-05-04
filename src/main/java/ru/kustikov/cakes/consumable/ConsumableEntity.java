@@ -50,7 +50,4 @@ public class ConsumableEntity {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private UserEntity user;
-
-    @ManyToMany
-    private List<ProductEntity> products;
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.kustikov.cakes.consumable.ConsumableEntity;
+import ru.kustikov.cakes.consumableproduct.ConsumableProductEntity;
 import ru.kustikov.cakes.filling.FillingEntity;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
@@ -52,12 +53,12 @@ public class ProductEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private ProductOrderEntity productOrder;
 
-    @ManyToMany
-    private List<ConsumableEntity> consumables;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity author;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ConsumableProductEntity> consumableProducts;
 
     public ProductEntity(ProductEntity original) {
         this.name = original.getName();
