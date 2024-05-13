@@ -20,10 +20,10 @@ public class OrderController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> createProduct(@RequestBody OrderRecord order) {
-        orderService.update(order);
+    public ResponseEntity<String> save(@RequestBody OrderRecord order) {
+        OrderEntity orderEntity = orderService.update(order);
 
-//        statisticService. TODO меняй статистику
+        statisticService.calculate(orderEntity);
         return ResponseEntity.ok("Success!");
     }
 }

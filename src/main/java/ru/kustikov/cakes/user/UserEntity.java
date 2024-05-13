@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.kustikov.cakes.consumable.ConsumableEntity;
 import ru.kustikov.cakes.filling.FillingEntity;
+import ru.kustikov.cakes.order.OrderEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
 import ru.kustikov.cakes.rolerequest.RoleRequestEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
@@ -72,5 +73,4 @@ public class UserEntity {
 
     @Column(name = "last_activity")
     private Timestamp lastActivity;
-
 }

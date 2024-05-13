@@ -3,16 +3,19 @@ package ru.kustikov.cakes.consumable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import ru.kustikov.cakes.mail.MailData;
+import ru.kustikov.cakes.user.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ConsumableService {
     private final ConsumableRepository consumableRepository;
+    private final UserRepository userRepository;
     private final ConsumableMapper consumableMapper;
 
     public ConsumableRecord create(ConsumableRecord consumableRecord) {
@@ -27,16 +30,19 @@ public class ConsumableService {
         return consumableMapper.entityToDto(consumableEntity);
     }
 
-    public List<ConsumableRecord> update(List<ConsumableRecord> records) {
-        Iterable<ConsumableEntity> savedConsumableEntity = consumableRepository
-                .saveAll(records
-                        .stream()
-                        .map(consumableMapper::dtoToEntity)
-                        .collect(Collectors.toList()
-                        ));
-        return StreamSupport.stream(savedConsumableEntity.spliterator(), false)
-                .map(consumableMapper::entityToDto)
-                .collect(Collectors.toList());
+    public ConsumableRecord update(ConsumableRecord record) {
+        ConsumableEntity entity = consumableMapper.dtoToEntity(record);
+        entity.setUser(userRepository.findById(Long.valueOf(record.getUserId())).orElseThrow());
+
+        ConsumableEntity savedEntity = consumableRepository.save(entity);
+        if (savedEntity.getThreshold() > savedEntity.getQuantity()) {
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "http://localhost:4302/api/v1/mail/send-msg";
+            restTemplate.postForObject(url, new MailData(savedEntity.getUser().getEmail(), "У вас заканчивается " + savedEntity.getName() +
+                    ".\nОсталось " + savedEntity.getQuantity() + " " + savedEntity.getQuantityType()), String.class);
+        }
+
+        return consumableMapper.entityToDto(savedEntity);
     }
 
     public void delete(Long id) {

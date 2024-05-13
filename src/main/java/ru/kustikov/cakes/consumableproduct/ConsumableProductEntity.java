@@ -1,5 +1,6 @@
 package ru.kustikov.cakes.consumableproduct;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,10 +27,10 @@ public class ConsumableProductEntity {
     @Column(name = "consumable_product_id")
     private Long consumableProductId;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private ConsumableEntity consumable;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 

@@ -2,14 +2,14 @@ package ru.kustikov.cakes.consumable;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/consumable")
@@ -24,14 +24,16 @@ public class ConsumableController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<List<ConsumableRecord>> createProduct(@RequestBody List<ConsumableRecord> consumables) {
+    public ResponseEntity<ConsumableRecord> create(@RequestBody ConsumableRecord consumables) {
         return ResponseEntity.ok(consumableService.update(consumables));
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<String> deleteProduct(@RequestBody ConsumableRecord consumable) {
-        consumableService.delete(consumable.getConsumableId());
+    @DeleteMapping("/delete/{consumableId}")
+    public ResponseEntity<String> delete(@PathVariable Long consumableId) {
+        consumableService.delete(consumableId);
         return ResponseEntity.ok("Success!");
     }
+
+
 
 }

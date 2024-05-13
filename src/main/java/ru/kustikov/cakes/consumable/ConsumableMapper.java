@@ -6,6 +6,7 @@ import org.mapstruct.NullValueCheckStrategy;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface ConsumableMapper {
+    @Mapping(source = "user.userId", target = "userId")
     ConsumableRecord entityToDto(ConsumableEntity entity);
 
     ConsumableEntity dtoToEntity(ConsumableRecord dto);

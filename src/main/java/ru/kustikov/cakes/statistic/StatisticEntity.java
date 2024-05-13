@@ -51,4 +51,15 @@ public class StatisticEntity {
 
     @Column(name = "profit")
     private Long profit;
+
+    public StatisticEntity(UserEntity user, Integer year, Integer month, Integer orderCount, Integer customerCount, Long income, Long expences, Long profit) {
+        this.user = user;
+        this.year = year;
+        this.month = month;
+        this.orderCount = orderCount;
+        this.customerCount = customerCount;
+        this.income = income;
+        this.expences = expences;
+        this.profit = profit;
+    }
 }

@@ -1,12 +1,12 @@
 package ru.kustikov.cakes.order;
 
-import jakarta.persistence.PostPersist;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kustikov.cakes.product.ProductEntity;
 import ru.kustikov.cakes.product.ProductRepository;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
+import ru.kustikov.cakes.productorder.ProductOrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final ProductRepository productRepository;
+    private final ProductOrderRepository productOrderRepository;
     private final OrderMapper orderMapper;
 
     public List<OrderRecord> getAllByUserId(String userId) {
@@ -35,8 +35,7 @@ public class OrderService {
         return orderMapper.entityToDto(orderEntity);
     }
 
-    @PostPersist
-    public OrderRecord update(OrderRecord orderRecord) {
+    public OrderEntity update(OrderRecord orderRecord) {
         OrderEntity orderEntity = orderMapper.dtoToEntity(orderRecord);
 
         List<ProductEntity> products = new ArrayList<>();
@@ -47,11 +46,10 @@ public class OrderService {
         for (int i = 0; i < orderEntity.getProductOrders().size(); i++) {
             ProductOrderEntity productOrderEntity = orderEntity.getProductOrders().get(i);
             productOrderEntity.setProduct(products.get(i));
+            productOrderRepository.save(productOrderEntity);
         }
 
-        OrderEntity savedOrderEntity = orderRepository.save(orderEntity);
-
-        return orderMapper.entityToDto(savedOrderEntity);
+        return orderRepository.save(orderEntity);
     }
 
     public void delete(Long id) {

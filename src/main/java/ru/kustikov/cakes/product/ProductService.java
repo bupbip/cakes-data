@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ru.kustikov.cakes.user.UserEntity;
 import ru.kustikov.cakes.user.UserMapper;
 import ru.kustikov.cakes.user.UserRecord;
 import ru.kustikov.cakes.user.UserRepository;
@@ -44,9 +45,11 @@ public class ProductService {
     }
 
     public ProductRecord update(ProductRecord productRecord) {
+        UserEntity user = userRepository.findByUsername(productRecord.getOwnerUsername()).orElseThrow();
         ProductEntity productEntity = productMapper.dtoToEntity(productRecord);
-        productEntity.setAuthor(userRepository.findByUsername(productRecord.getOwnerUsername()).orElseThrow());
+        productEntity.setAuthor(user);
         productEntity.getConsumableProducts().forEach(p -> p.setProduct(productEntity));
+        productEntity.getConsumableProducts().forEach(cp -> cp.getConsumable().setUser(user));
         ProductEntity savedProductEntity = productRepository.save(productEntity);
         return productMapper.entityToDto(savedProductEntity);
     }
