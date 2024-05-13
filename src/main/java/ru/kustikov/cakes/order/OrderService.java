@@ -3,6 +3,10 @@ package ru.kustikov.cakes.order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.kustikov.cakes.consumable.ConsumableEntity;
+import ru.kustikov.cakes.consumable.ConsumableRepository;
+import ru.kustikov.cakes.consumableproduct.ConsumableProductEntity;
 import ru.kustikov.cakes.product.ProductEntity;
 import ru.kustikov.cakes.product.ProductRepository;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
@@ -17,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final ProductOrderRepository productOrderRepository;
+    private final ConsumableRepository consumableRepository;
     private final OrderMapper orderMapper;
 
     public List<OrderRecord> getAllByUserId(String userId) {
@@ -38,19 +42,22 @@ public class OrderService {
     public OrderEntity update(OrderRecord orderRecord) {
         OrderEntity orderEntity = orderMapper.dtoToEntity(orderRecord);
 
-        List<ProductEntity> products = new ArrayList<>();
-        for (ProductEntity product : orderEntity.getProductOrders().stream().map(ProductOrderEntity::getProduct).toList()) {
-            products.add(new ProductEntity(product));
-        }
-
-        for (int i = 0; i < orderEntity.getProductOrders().size(); i++) {
-            ProductOrderEntity productOrderEntity = orderEntity.getProductOrders().get(i);
-            productOrderEntity.setProduct(products.get(i));
-            productOrderRepository.save(productOrderEntity);
+        for (ProductOrderEntity productOrder : orderEntity.getProductOrders()) {
+            ProductEntity product = productOrder.getProduct();
+            product.getConsumableProducts().forEach(cp -> {
+                cp.setProduct(product);
+                if (cp.getConsumable().getConsumableId() != null) {
+                    ConsumableEntity existingConsumable = consumableRepository.findById(cp.getConsumable().getConsumableId()).orElse(null);
+                    if (existingConsumable != null) {
+                        cp.setConsumable(existingConsumable);
+                    }
+                }
+            });
         }
 
         return orderRepository.save(orderEntity);
     }
+
 
     public void delete(Long id) {
         orderRepository.deleteById(id);

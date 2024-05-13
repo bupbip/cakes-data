@@ -36,4 +36,10 @@ public class ConsumableProductEntity {
 
     @Column(name = "count")
     private Double count;
+
+    public ConsumableProductEntity(ConsumableProductEntity consumableProduct) {
+        this.consumable = consumableProduct.consumable;
+        this.product = consumableProduct.product;
+        this.count = consumableProduct.count;
+    }
 }

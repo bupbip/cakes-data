@@ -13,6 +13,7 @@ import ru.kustikov.cakes.producttype.ProductTypeEntity;
 import ru.kustikov.cakes.user.UserEntity;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity(name = "products")
 @Getter
@@ -69,5 +70,11 @@ public class ProductEntity {
         this.topping = original.getTopping();
         this.comment = original.getComment();
         this.image = original.getImage();
+        this.productOrder = original.getProductOrder();
+        this.author = original.getAuthor();
+        this.consumableProducts = original.getConsumableProducts().stream()
+                .map(ConsumableProductEntity::new)
+                .peek(cp -> cp.setProduct(this))
+                .collect(Collectors.toList());
     }
 }
