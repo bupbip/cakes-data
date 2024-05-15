@@ -6,6 +6,7 @@ import ru.kustikov.cakes.producttype.ProductTypeRecord;
 import ru.kustikov.cakes.rolerequest.RoleRequestEntity;
 import ru.kustikov.cakes.rolerequest.RoleRequestRecord;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
+import ru.kustikov.cakes.subscriptions.SubscriptionsRecord;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -35,4 +36,6 @@ public class UserRecord {
     private List<FillingRecord> fillings;
 
     private Timestamp lastActivity;
+
+    private SubscriptionsRecord subscriptions;
 }

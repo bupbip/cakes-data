@@ -100,7 +100,9 @@ public class StatisticService {
             userRepository.save(confectioner);
         }
         if (orderEntity.getStatus() == OrderStatus.PAID) {
-            statistic.setProfit(Long.valueOf(orderEntity.getResultPrice()) + statistic.getProfit());
+            statistic.setIncome(Long.valueOf(orderEntity.getResultPrice()) + statistic.getIncome());
+            statistic.setExpences(Long.valueOf(orderEntity.getSpentPrice()) + statistic.getExpences());
+            statistic.setProfit(statistic.getIncome() - statistic.getExpences() + statistic.getProfit());
         }
         statisticRepository.save(statistic);
     }

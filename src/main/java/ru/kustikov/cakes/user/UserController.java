@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> createProduct(@RequestBody UserRecord user) {
+    public ResponseEntity<String> saveUser(@RequestBody UserRecord user) {
         userService.update(user);
         return ResponseEntity.ok("Success!");
     }

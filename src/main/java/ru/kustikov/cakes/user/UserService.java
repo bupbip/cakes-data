@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.kustikov.cakes.producttype.ProductTypeRepository;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkRepository;
+import ru.kustikov.cakes.subscriptions.SubscriptionsRepository;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final SocialNetworkRepository socialNetworkRepository;
     private final ProductTypeRepository productTypeRepository;
+    private final SubscriptionsRepository subscriptionsRepository;
 
     private final UserMapper userMapper;
 
@@ -48,8 +50,11 @@ public class UserService {
         userEntity.getSocialNetworks().forEach(social -> social.setUser(userEntity));
         userEntity.getFillings().forEach(filling -> filling.setUser(userEntity));
         userEntity.getProductTypes().forEach(productType -> productType.setUser(userEntity));
+        userEntity.getSubscriptions().setUser(userEntity);
+
         socialNetworkRepository.saveAll(userEntity.getSocialNetworks());
         productTypeRepository.saveAll(userEntity.getProductTypes());
+        subscriptionsRepository.save(userEntity.getSubscriptions());
 
         UserEntity savedUserEntity = userRepository.save(userEntity);
         return userMapper.entityToDto(savedUserEntity);

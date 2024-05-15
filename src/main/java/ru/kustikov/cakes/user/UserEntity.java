@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ import ru.kustikov.cakes.order.OrderEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
 import ru.kustikov.cakes.rolerequest.RoleRequestEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
+import ru.kustikov.cakes.subscriptions.SubscriptionsEntity;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -73,4 +75,7 @@ public class UserEntity {
 
     @Column(name = "last_activity")
     private Timestamp lastActivity;
+
+    @OneToOne
+    private SubscriptionsEntity subscriptions;
 }
