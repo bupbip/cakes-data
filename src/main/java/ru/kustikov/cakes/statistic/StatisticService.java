@@ -9,6 +9,7 @@ import ru.kustikov.cakes.order.OrderEntity;
 import ru.kustikov.cakes.order.OrderRepository;
 import ru.kustikov.cakes.order.OrderStatus;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
+import ru.kustikov.cakes.subscriptions.SendMailService;
 import ru.kustikov.cakes.user.UserEntity;
 import ru.kustikov.cakes.user.UserRepository;
 
@@ -25,6 +26,7 @@ public class StatisticService {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final StatisticMapper statisticMapper;
+    private final SendMailService mailService;
 
     public StatisticRecord create(StatisticRecord statisticRecord) {
         StatisticEntity statisticEntity = statisticMapper.dtoToEntity(statisticRecord);
@@ -125,6 +127,11 @@ public class StatisticService {
                         if (userConsumable.getConsumableId().equals(consumableProduct.getConsumable().getConsumableId())) {
                             double newCount = userConsumable.getQuantity() - consumableProduct.getCount();
                             userConsumable.setQuantity(newCount);
+                            if (userConsumable.getThreshold() > userConsumable.getQuantity() && user.getSubscriptions().isConsumable()) {
+                                mailService.send(userConsumable.getUser().getEmail(),
+                                        "У вас заканчивается " + userConsumable.getName() +
+                                                ".\nОсталось " + userConsumable.getQuantity() + " " + userConsumable.getQuantityType());
+                            }
                             break;
                         }
                     }

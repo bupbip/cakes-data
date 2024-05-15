@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.kustikov.cakes.mail.MailData;
+import ru.kustikov.cakes.subscriptions.SendMailService;
 import ru.kustikov.cakes.user.UserRepository;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ConsumableService {
     private final ConsumableRepository consumableRepository;
     private final UserRepository userRepository;
     private final ConsumableMapper consumableMapper;
+    private final SendMailService mailService;
 
     public ConsumableRecord create(ConsumableRecord consumableRecord) {
         ConsumableEntity consumableEntity = consumableMapper.dtoToEntity(consumableRecord);
@@ -35,11 +37,10 @@ public class ConsumableService {
         entity.setUser(userRepository.findById(Long.valueOf(record.getUserId())).orElseThrow());
 
         ConsumableEntity savedEntity = consumableRepository.save(entity);
-        if (savedEntity.getThreshold() > savedEntity.getQuantity()) {
-            RestTemplate restTemplate = new RestTemplate();
-            String url = "http://localhost:4302/api/v1/mail/send-msg";
-            restTemplate.postForObject(url, new MailData(savedEntity.getUser().getEmail(), "У вас заканчивается " + savedEntity.getName() +
-                    ".\nОсталось " + savedEntity.getQuantity() + " " + savedEntity.getQuantityType()), String.class);
+        if (savedEntity.getThreshold() > savedEntity.getQuantity() && savedEntity.getUser().getSubscriptions().isConsumable()) {
+            mailService.send(savedEntity.getUser().getEmail(),
+                    "У вас заканчивается " + savedEntity.getName() +
+                            ".\nОсталось " + savedEntity.getQuantity() + " " + savedEntity.getQuantityType());
         }
 
         return consumableMapper.entityToDto(savedEntity);
