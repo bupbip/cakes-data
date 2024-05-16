@@ -57,6 +57,16 @@ public class StatisticService {
                 .collect(Collectors.toList());
     }
 
+    public List<StatisticRecord> getStatToSendByMonth(Integer month) {
+        Integer year = LocalDate.now().getYear();
+        List<StatisticEntity> entities = statisticRepository.findAllByYearAndMonthAndUser_Subscriptions_Monthly(
+                year, month, true);
+
+        return entities.stream()
+                .map(statisticMapper::entityToDto)
+                .collect(Collectors.toList());
+    }
+
     public void calculate(OrderEntity orderEntity) {
         LocalDate date = orderEntity.getCreatedDate().toLocalDate();
 

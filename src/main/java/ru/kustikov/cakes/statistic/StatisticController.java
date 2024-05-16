@@ -16,8 +16,13 @@ public class StatisticController {
     private final StatisticService statisticService;
 
     @GetMapping("/get")
-    public ResponseEntity<List<StatisticRecord>> getUserOrders(@RequestParam Integer year,
-                                                               @RequestParam Long userId) {
+    public ResponseEntity<List<StatisticRecord>> getStatistic(@RequestParam Integer year,
+                                                                @RequestParam Long userId) {
         return ResponseEntity.ok(statisticService.getAllByYear(year, userId));
+    }
+
+    @GetMapping("/get-month-statistic")
+    public ResponseEntity<List<StatisticRecord>> getMonthStatistic(@RequestParam Integer month) {
+        return ResponseEntity.ok(statisticService.getStatToSendByMonth(month));
     }
 }

@@ -24,4 +24,6 @@ public class StatisticRecord {
     private Long expences;
 
     private Long profit;
+
+    private String userEmail;
 }

@@ -12,5 +12,7 @@ import java.util.Optional;
 public interface StatisticRepository extends CrudRepository<StatisticEntity, Long> {
     List<StatisticEntity> findAllByYearAndUser(Integer year, UserEntity user);
 
+    List<StatisticEntity> findAllByYearAndMonthAndUser_Subscriptions_Monthly(Integer year, Integer month, boolean subscribe);
+
     Optional<StatisticEntity> findByYearAndMonthAndUser(Integer year, Integer month, UserEntity user);
 }
