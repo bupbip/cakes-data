@@ -1,10 +1,11 @@
 package ru.kustikov.cakes.order;
 
 import org.mapstruct.*;
+import ru.kustikov.cakes.feedback.FeedbackMapper;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
 import ru.kustikov.cakes.productorder.ProductOrderRecord;
 
-@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+@Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, uses = FeedbackMapper.class)
 public interface OrderMapper {
     @Mapping(source = "entity.productOrders", target = "products")
     @Mapping(source = "entity.orderId", target = "orderId")

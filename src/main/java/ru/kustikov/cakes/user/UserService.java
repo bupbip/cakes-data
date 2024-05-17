@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import ru.kustikov.cakes.feedback.FeedbackRepository;
 import ru.kustikov.cakes.producttype.ProductTypeRepository;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkRepository;
 import ru.kustikov.cakes.subscriptions.SubscriptionsRepository;
@@ -18,6 +19,7 @@ public class UserService {
     private final SocialNetworkRepository socialNetworkRepository;
     private final ProductTypeRepository productTypeRepository;
     private final SubscriptionsRepository subscriptionsRepository;
+    private final FeedbackRepository feedbackRepository;
 
     private final UserMapper userMapper;
 
@@ -50,11 +52,15 @@ public class UserService {
         userEntity.getSocialNetworks().forEach(social -> social.setUser(userEntity));
         userEntity.getFillings().forEach(filling -> filling.setUser(userEntity));
         userEntity.getProductTypes().forEach(productType -> productType.setUser(userEntity));
-        userEntity.getSubscriptions().setUser(userEntity);
+        userEntity.getFeedbacksTo().forEach(feedbackEntity -> feedbackEntity.setUserTo(userEntity));
+        if (userEntity.getSubscriptions() != null) {
+            userEntity.getSubscriptions().setUser(userEntity);
+            subscriptionsRepository.save(userEntity.getSubscriptions());
+        }
 
         socialNetworkRepository.saveAll(userEntity.getSocialNetworks());
         productTypeRepository.saveAll(userEntity.getProductTypes());
-        subscriptionsRepository.save(userEntity.getSubscriptions());
+        feedbackRepository.saveAll(userEntity.getFeedbacksTo());
 
         UserEntity savedUserEntity = userRepository.save(userEntity);
         return userMapper.entityToDto(savedUserEntity);

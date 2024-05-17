@@ -20,7 +20,7 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getAllByUserId(userId));
     }
 
-    @PostMapping("/save")
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> save(@RequestBody OrderRecord order) {
         OrderEntity orderEntity = orderService.update(order);
 

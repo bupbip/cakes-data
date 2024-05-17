@@ -84,6 +84,5 @@ public class UserEntity {
     private List<FeedbackEntity> feedbacksFrom;
 
     @OneToMany(mappedBy = "userTo", fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<FeedbackEntity> feedbacksTo;
 }

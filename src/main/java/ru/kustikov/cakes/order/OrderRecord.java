@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "orderId")
 public class OrderRecord {
     private Long orderId;
 
@@ -25,10 +24,8 @@ public class OrderRecord {
 
     private String comment;
 
-    @JsonManagedReference
     private UserRecord customer;
 
-    @JsonManagedReference
     private UserRecord confectioner;
 
     private LocalDateTime createdDate;

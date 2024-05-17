@@ -26,7 +26,6 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "feedbackId")
 public class FeedbackEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,12 +34,10 @@ public class FeedbackEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id_from")
-    @JsonBackReference
     private UserEntity userFrom;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id_to")
-    @JsonBackReference
     private UserEntity userTo;
 
     @Column(name = "rating")
