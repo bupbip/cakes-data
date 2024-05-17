@@ -8,5 +8,4 @@ import java.util.List;
 
 @Repository
 public interface FeedbackRepository extends CrudRepository<FeedbackEntity, Long> {
-    List<FeedbackEntity> getAllByUserToOrderByCreatedDate(UserEntity baker);
 }

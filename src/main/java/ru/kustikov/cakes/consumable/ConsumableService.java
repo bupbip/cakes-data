@@ -3,8 +3,6 @@ package ru.kustikov.cakes.consumable;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import ru.kustikov.cakes.mail.MailData;
 import ru.kustikov.cakes.subscriptions.SendMailService;
 import ru.kustikov.cakes.user.UserRepository;
 
@@ -19,12 +17,6 @@ public class ConsumableService {
     private final UserRepository userRepository;
     private final ConsumableMapper consumableMapper;
     private final SendMailService mailService;
-
-    public ConsumableRecord create(ConsumableRecord consumableRecord) {
-        ConsumableEntity consumableEntity = consumableMapper.dtoToEntity(consumableRecord);
-        ConsumableEntity savedConsumableEntity = consumableRepository.save(consumableEntity);
-        return consumableMapper.entityToDto(savedConsumableEntity);
-    }
 
     public ConsumableRecord get(Long id) {
         ConsumableEntity consumableEntity = consumableRepository.findById(id)

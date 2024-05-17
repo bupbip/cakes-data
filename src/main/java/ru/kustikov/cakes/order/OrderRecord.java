@@ -1,8 +1,11 @@
 package ru.kustikov.cakes.order;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import ru.kustikov.cakes.productorder.ProductOrderRecord;
-import ru.kustikov.cakes.user.UserEntity;
+import ru.kustikov.cakes.user.UserRecord;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,9 +22,11 @@ public class OrderRecord {
 
     private Integer resultPrice;
 
-    private UserEntity customer;
+    private String comment;
 
-    private UserEntity confectioner;
+    private UserRecord customer;
+
+    private UserRecord confectioner;
 
     private LocalDateTime createdDate;
 

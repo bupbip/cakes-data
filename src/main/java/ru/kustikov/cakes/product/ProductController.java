@@ -2,8 +2,12 @@ package ru.kustikov.cakes.product;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.kustikov.cakes.user.UserEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.kustikov.cakes.user.UserMapper;
 import ru.kustikov.cakes.user.UserRecord;
 import ru.kustikov.cakes.user.UserService;

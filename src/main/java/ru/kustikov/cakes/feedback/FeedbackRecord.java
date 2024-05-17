@@ -1,7 +1,8 @@
 package ru.kustikov.cakes.feedback;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import ru.kustikov.cakes.user.UserEntity;
+import ru.kustikov.cakes.user.UserRecord;
 
 import java.sql.Timestamp;
 
@@ -9,9 +10,10 @@ import java.sql.Timestamp;
 public class FeedbackRecord {
     private Long feedbackId;
 
-    private String userFrom;
+    private UserRecord userFrom;
 
-    private UserEntity userTo;
+    @JsonIgnore
+    private Long userTo;
 
     private Integer rating;
 

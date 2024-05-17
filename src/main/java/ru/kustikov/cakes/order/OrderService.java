@@ -3,17 +3,12 @@ package ru.kustikov.cakes.order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.kustikov.cakes.consumable.ConsumableEntity;
 import ru.kustikov.cakes.consumable.ConsumableRepository;
-import ru.kustikov.cakes.consumableproduct.ConsumableProductEntity;
 import ru.kustikov.cakes.product.ProductEntity;
-import ru.kustikov.cakes.product.ProductRepository;
 import ru.kustikov.cakes.productorder.ProductOrderEntity;
-import ru.kustikov.cakes.productorder.ProductOrderRepository;
 import ru.kustikov.cakes.subscriptions.SendMailService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

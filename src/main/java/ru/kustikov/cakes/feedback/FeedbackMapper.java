@@ -6,8 +6,9 @@ import org.mapstruct.NullValueCheckStrategy;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface FeedbackMapper {
-    @Mapping(target = "userFrom", source = "feedback.userFrom.username")
+    @Mapping(source = "feedback.userTo.userId", target = "userTo")
     FeedbackRecord entityToDto(FeedbackEntity feedback);
 
-//    FeedbackEntity dtoToEntity(FeedbackRecord feedback);
+    @Mapping(target = "userTo", ignore = true)
+    FeedbackEntity dtoToEntity(FeedbackRecord feedback);
 }

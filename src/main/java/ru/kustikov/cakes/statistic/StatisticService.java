@@ -75,7 +75,7 @@ public class StatisticService {
                 date.getMonthValue(),
                 orderEntity.getConfectioner()
         ).orElse(new StatisticEntity(orderEntity.getConfectioner(), date.getYear(), date.getMonthValue(),
-                0, 0, 0L, 0L,0L));
+                0, 0, 0L, 0L, 0L));
         if (orderEntity.getStatus() == OrderStatus.APPLIED) { // принят
             statistic.setOrderCount(statistic.getOrderCount() + 1);
             List<OrderEntity> filteredOrders = orderRepository.getAllByCustomerOrderByCreatedDate(orderEntity.getCustomer()).stream()
