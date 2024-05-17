@@ -19,9 +19,7 @@ import lombok.Setter;
 import ru.kustikov.cakes.consumable.ConsumableEntity;
 import ru.kustikov.cakes.feedback.FeedbackEntity;
 import ru.kustikov.cakes.filling.FillingEntity;
-import ru.kustikov.cakes.order.OrderEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
-import ru.kustikov.cakes.rolerequest.RoleRequestEntity;
 import ru.kustikov.cakes.socialnetwork.SocialNetworkEntity;
 import ru.kustikov.cakes.subscriptions.SubscriptionsEntity;
 
@@ -58,7 +56,7 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "image", columnDefinition="TEXT")
+    @Column(name = "image", columnDefinition = "TEXT")
     private String image;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")

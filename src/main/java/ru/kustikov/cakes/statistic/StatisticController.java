@@ -17,7 +17,7 @@ public class StatisticController {
 
     @GetMapping("/get")
     public ResponseEntity<List<StatisticRecord>> getStatistic(@RequestParam Integer year,
-                                                                @RequestParam Long userId) {
+                                                              @RequestParam Long userId) {
         return ResponseEntity.ok(statisticService.getAllByYear(year, userId));
     }
 

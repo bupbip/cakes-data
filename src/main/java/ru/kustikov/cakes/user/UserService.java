@@ -67,7 +67,7 @@ public class UserService {
     }
 
     public List<UserRecord> getConfectioners(Integer skip, Integer limit) {
-        return userRepository.findAllByRoleOrderByLastActivity(PageRequest.of(skip/limit, limit), Role.ROLE_CONFECTIONER)
+        return userRepository.findAllByRoleOrderByLastActivity(PageRequest.of(skip / limit, limit), Role.ROLE_CONFECTIONER)
                 .stream().map(userMapper::entityToDto)
                 .toList();
     }

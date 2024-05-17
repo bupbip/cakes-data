@@ -3,7 +3,6 @@ package ru.kustikov.cakes.rolerequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.NullValueCheckStrategy;
 import ru.kustikov.cakes.feedback.FeedbackMapper;
-import ru.kustikov.cakes.filling.FillingMapper;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, uses = FeedbackMapper.class)
 public interface RoleRequestMapper {

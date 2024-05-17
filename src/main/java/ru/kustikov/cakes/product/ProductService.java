@@ -29,7 +29,7 @@ public class ProductService {
     }
 
     public List<ProductRecord> getAll(Integer skip, Integer limit) {
-        Page<ProductEntity> products = productRepository.findAllByAuthorNotNull(PageRequest.of(skip/limit, limit));
+        Page<ProductEntity> products = productRepository.findAllByAuthorNotNull(PageRequest.of(skip / limit, limit));
 
         return products.stream()
                 .map(productMapper::entityToDto)

@@ -14,6 +14,4 @@ public interface OrderRepository extends CrudRepository<OrderEntity, Long> {
 
 
     List<OrderEntity> getAllByCustomer_UserIdOrConfectioner_UserIdOrderByCreatedDateDesc(Long customerId, Long confectionerId);
-
-
 }

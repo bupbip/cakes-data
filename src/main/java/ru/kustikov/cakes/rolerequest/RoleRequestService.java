@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.kustikov.cakes.user.Role;
-import ru.kustikov.cakes.user.UserEntity;
 import ru.kustikov.cakes.user.UserRepository;
 
 import java.util.List;
