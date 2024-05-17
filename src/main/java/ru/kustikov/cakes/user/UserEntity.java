@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.kustikov.cakes.consumable.ConsumableEntity;
+import ru.kustikov.cakes.feedback.FeedbackEntity;
 import ru.kustikov.cakes.filling.FillingEntity;
 import ru.kustikov.cakes.order.OrderEntity;
 import ru.kustikov.cakes.producttype.ProductTypeEntity;
@@ -78,4 +79,11 @@ public class UserEntity {
 
     @OneToOne
     private SubscriptionsEntity subscriptions;
+
+    @OneToMany(mappedBy = "userFrom", fetch = FetchType.LAZY)
+    private List<FeedbackEntity> feedbacksFrom;
+
+    @OneToMany(mappedBy = "userTo", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<FeedbackEntity> feedbacksTo;
 }

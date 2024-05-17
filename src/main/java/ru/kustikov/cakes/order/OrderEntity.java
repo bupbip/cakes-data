@@ -37,6 +37,8 @@ public class OrderEntity {
 
     private String address;
 
+    private String comment;
+
     @ManyToOne
     private UserEntity customer;
 

@@ -1,7 +1,14 @@
 package ru.kustikov.cakes.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import ru.kustikov.cakes.feedback.FeedbackEntity;
+import ru.kustikov.cakes.feedback.FeedbackRecord;
 import ru.kustikov.cakes.filling.FillingRecord;
+import ru.kustikov.cakes.order.OrderRecord;
 import ru.kustikov.cakes.producttype.ProductTypeRecord;
 import ru.kustikov.cakes.rolerequest.RoleRequestEntity;
 import ru.kustikov.cakes.rolerequest.RoleRequestRecord;
@@ -38,4 +45,10 @@ public class UserRecord {
     private Timestamp lastActivity;
 
     private SubscriptionsRecord subscriptions;
+
+    @JsonBackReference
+    private List<OrderRecord> orders;
+
+    @JsonManagedReference
+    private List<FeedbackRecord> feedbacksTo;
 }
