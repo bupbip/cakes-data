@@ -42,4 +42,11 @@ public class RoleRequestService {
         roleRequestRepository.delete(entity);
         return "success";
     }
+
+    public String save(RoleRequestRecord request) {
+        RoleRequestEntity entity = roleRequestMapper.dtoToEntity(request);
+
+        roleRequestRepository.save(entity);
+        return "saved";
+    }
 }

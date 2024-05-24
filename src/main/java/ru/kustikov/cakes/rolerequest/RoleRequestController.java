@@ -30,4 +30,9 @@ public class RoleRequestController {
     public ResponseEntity<String> decline(@RequestBody RoleRequestRecord request) {
         return ResponseEntity.ok(roleRequestService.decline(request));
     }
+
+    @PostMapping("/save")
+    public ResponseEntity<String> save(@RequestBody RoleRequestRecord record) {
+        return ResponseEntity.ok(roleRequestService.save(record));
+    }
 }

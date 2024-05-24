@@ -42,21 +42,25 @@ public class OrderService {
 
         for (ProductOrderEntity productOrder : orderEntity.getProductOrders()) {
             ProductEntity product = productOrder.getProduct();
-            product.getConsumableProducts().forEach(cp -> {
-                cp.setProduct(product);
-                if (cp.getConsumable().getConsumableId() != null) {
-                    ConsumableEntity existingConsumable = consumableRepository.findById(cp.getConsumable().getConsumableId()).orElse(null);
-                    if (existingConsumable != null) {
-                        cp.setConsumable(existingConsumable);
+            if (product.getConsumableProducts() != null) {
+                product.getConsumableProducts().forEach(cp -> {
+                    cp.setProduct(product);
+                    if (cp.getConsumable().getConsumableId() != null) {
+                        ConsumableEntity existingConsumable = consumableRepository.findById(cp.getConsumable().getConsumableId()).orElse(null);
+                        if (existingConsumable != null) {
+                            cp.setConsumable(existingConsumable);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
 
-        if (orderRepository.findById(orderRecord.getOrderId()).isPresent()) {
+        if (orderRecord.getOrderId() != null && orderRepository.findById(orderRecord.getOrderId()).isPresent()) {
             OrderEntity savedOrder = orderRepository.findById(orderRecord.getOrderId()).get();
             if (savedOrder.getStatus() != orderEntity.getStatus()) {
                 mailService.send(orderEntity.getCustomer().getEmail(),
+                        "Статус заказа №" + savedOrder.getOrderId() + " поменялся на " + orderEntity.getStatus().getInfo() + ".");
+                mailService.send(orderEntity.getConfectioner().getEmail(),
                         "Статус заказа №" + savedOrder.getOrderId() + " поменялся на " + orderEntity.getStatus().getInfo() + ".");
             }
             if (!Objects.equals(savedOrder.getResultPrice(), orderEntity.getResultPrice())) {
